@@ -2,7 +2,7 @@
   "name": "prefmark",
   "displayName": "PrefMark",
   "version": "1.0.0",
-  "description": "Your PrefMark deals, Investment Memos, open diligence questions and what changed, available to your agents. Agents can propose updates; you approve them in PrefMark.",
+  "description": "Your PrefMark deals in Cursor: each deal's current stance, what the decision hangs on, active risks, evidence, open diligence questions, and what changed since you last looked. Agents can propose an update; you approve it in PrefMark.",
   "author": {
     "name": "PrefMark",
     "email": "hello@prefmark.com"
