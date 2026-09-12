@@ -1,0 +1,30 @@
+{
+  "name": "prefmark",
+  "displayName": "PrefMark",
+  "version": "1.0.0",
+  "description": "Your PrefMark deals, Investment Memos, open diligence questions and what changed, available to your agents. Agents can propose updates; you approve them in PrefMark.",
+  "author": {
+    "name": "PrefMark",
+    "email": "hello@prefmark.com"
+  },
+  "homepage": "https://prefmark.com",
+  "license": "Proprietary",
+  "logo": "./logo.svg",
+  "keywords": [
+    "prefmark",
+    "investing",
+    "venture",
+    "deals",
+    "investment-memo",
+    "diligence",
+    "mcp"
+  ],
+  "category": "productivity",
+  "tags": [
+    "investing",
+    "deals",
+    "diligence",
+    "mcp"
+  ],
+  "mcpServers": "./mcp.json"
+}
