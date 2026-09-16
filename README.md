@@ -2,7 +2,7 @@
 
 PrefMark: The Investment Memo that stays current. Read stance, Since last time, and open questions from Deal State; propose updates that only land when you Accept in PrefMark.
 
-PrefMark is a pre-decision workspace for early-stage private investments. Startup materials become a structured Investment Memo with evidence tiers and provenance, open diligence questions, and a stance (Greenlight, Watch or Pass) that stays current as the deal moves. This repository connects Cursor, Claude Code and Gemini CLI to your own PrefMark workspace. Claude, ChatGPT and the Gemini app can connect to the same server by URL.
+PrefMark is a pre-decision workspace for early-stage private investments. Startup materials become a structured Investment Memo with evidence tiers and provenance, open diligence questions, and a stance (Greenlight, Watch or Pass) that stays current as the deal moves. This repository connects Cursor, Claude Code and Gemini CLI to your own PrefMark workspace. Claude, ChatGPT and Grok can connect to the same server by URL.
 
 ## What is in the plugin
 
@@ -14,10 +14,12 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 | Skill | `prefmark-relay-update` | Turns a founder email or meeting notes into a proposal on the right deal |
 | Skill | `prefmark-call-prep` | Questions for a founder or diligence call, blockers first |
 | Skill | `prefmark-whats-new` | What moved across your deals and what is waiting for your review |
+| Skill | `prefmark-memo-edit` | Proposes a rewrite of an Investment Memo section, which lands when you accept it |
 | Command | `/prefmark-status` | Runs the deal status skill (Gemini CLI uses the matching `.toml` files) |
 | Command | `/prefmark-relay` | Runs the relay skill on what is in the chat |
 | Command | `/prefmark-prep` | Runs the call prep skill |
 | Command | `/prefmark-whats-new` | Runs the what's new skill |
+| Command | `/prefmark-memo-edit` | Runs the memo edit skill |
 
 ## Tools
 
@@ -30,11 +32,21 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 | `get_pending_changes` | Read deals | Proposals waiting for you to accept or dismiss, with links into PrefMark |
 | `get_evidence` | Read evidence | Current facts (ARR, burn, runway, raise and more) with evidence tier, who asserted each, source, date and the earlier values they replaced |
 | `get_open_questions` | Read diligence | Open diligence questions from the tracker, blockers first |
+| `get_open_questions` | Read diligence | (with `include: "all"`) answered and resolved questions too, with answers and evidence |
+| `get_memo` | Read memos | The Investment Memo and Quick Read, as written in PrefMark |
 | `submit_deal_event` | Propose updates | Sends a statement, and up to five stated figures, to a deal **for your review** |
+| `add_question` | Edit diligence | Adds a question to the diligence tracker |
+| `update_question` | Edit diligence | Records an answer, evidence or notes, or changes a question status |
+| `remove_question` | Edit diligence | Deletes a question from the tracker |
+| `add_deals` | Add and edit deals | Adds up to 25 companies at once and never duplicates a deal you have |
+| `update_deal` | Add and edit deals | Changes name, stage, sector, website, HQ, round size, lead investor or description |
+| `add_note` | Add and edit deals | Saves meeting notes or an email to the deal's Materials |
 
-## Proposals, not edits
+## What saves right away, and what waits for you
 
-An agent can propose an update. It cannot change a deal. `submit_deal_event` compares each stated figure with what PrefMark already holds (supports, contradicts, new, or cannot be checked) and answers with one of:
+Your working records change the moment you ask: diligence questions and answers, deal details, new deals and notes. Sample deals cannot be changed from an app.
+
+The investment case is different. An agent never changes a stance, a fact or the memo by itself. `submit_deal_event` compares each stated figure with what PrefMark already holds (supports, contradicts, new, or cannot be checked) and answers with one of:
 
 - `pending_review`: something is new or different. It waits in PrefMark under **Needs your review**, and the answer includes a link straight to it.
 - `recorded`: it matches what PrefMark already had, so the case did not change.
@@ -68,21 +80,23 @@ Run `/mcp` and pick PrefMark to sign in.
 gemini extensions install https://github.com/eylonmkoret-creator/prefmark-cursor-plugin
 ```
 
-Run `/mcp auth prefmark` to sign in. The extension adds the same four commands as `/prefmark-status`, `/prefmark-relay`, `/prefmark-prep` and `/prefmark-whats-new`, and loads the PrefMark guidance from `GEMINI.md`.
+Run `/mcp auth prefmark` to sign in. The extension adds the same five commands as `/prefmark-status`, `/prefmark-relay`, `/prefmark-prep`, `/prefmark-whats-new` and `/prefmark-memo-edit`, and loads the PrefMark guidance from `GEMINI.md`.
 
-### Claude, ChatGPT and the Gemini app
+### Claude, ChatGPT and Grok
 
-These connect by URL and get the eight tools, without the skills and commands in this repository.
+These connect by URL and get all fifteen tools, without the skills and commands in this repository.
 
-- Claude: Settings, then Connectors, then Add custom connector. Paste `https://prefmark.com/mcp`.
-- ChatGPT: turn on developer mode under Settings, then add `https://prefmark.com/mcp` as a connector.
-- Gemini app: Settings, then Connected apps, then Custom apps. Paste `https://prefmark.com/mcp`. Google limits custom apps to personal accounts in the US.
+- Claude: Customize, then Connectors, then Add custom connector. Paste `https://prefmark.com/mcp`.
+- ChatGPT: Settings, then Security and login, then turn on Developer mode. Then Plugins, Create app, paste `https://prefmark.com/mcp` and keep OAuth.
+- Grok: grok.com/connectors, then New Connector, then Custom. Paste `https://prefmark.com/mcp`.
+
+Every app answers in the language you write in, including Hebrew and German.
 
 ### Permissions
 
-Leave the three read permissions ticked. Tick **Propose updates** only if you want agents to send proposals. It is off by default.
+Every permission starts ticked, so the agent can read, update your diligence tracker, add deals and notes, and propose updates. Untick anything you do not want.
 
-If a tool answers `insufficient_scope`, the connection was approved with fewer permissions than that tool needs. Disconnect PrefMark in your client, connect again, and tick the permissions you want. You can remove a connection at any time from **Settings → Connected agents** in PrefMark.
+If a tool answers `insufficient_scope`, the connection was approved with fewer permissions than that tool needs, or before that permission existed. Disconnect PrefMark in your client, connect again, and keep the permission ticked. You can remove a connection at any time from **Settings → Connected agents** in PrefMark.
 
 ## Access
 
@@ -92,7 +106,7 @@ PrefMark is currently available by invitation. You need a PrefMark account to co
 
 - OAuth 2.1 with PKCE. The plugin ships no credentials; your agent receives a token scoped to your own workspace, issued only after you approve the consent screen.
 - Every call is scoped to your account. Limits per connection: 300 calls an hour, 30 proposals an hour, 20 proposals per deal per day.
-- Read access plus proposals only. Proposals change nothing until you accept them.
+- Reads, direct edits to your working records (diligence tracker, deal details, new deals, notes) and proposals. Stance, facts and the memo change only when you accept a proposal. Untick any permission on the consent screen to leave it out.
 
 ## About
 
