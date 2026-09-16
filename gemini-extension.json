@@ -1,0 +1,11 @@
+{
+  "name": "prefmark",
+  "version": "1.2.0",
+  "description": "PrefMark — The Investment Memo that stays current. Read stance, Since last time, and open questions from Deal State; propose updates that only land when you Accept in PrefMark.",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "prefmark": {
+      "httpUrl": "https://prefmark.com/mcp"
+    }
+  }
+}

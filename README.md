@@ -1,20 +1,20 @@
-# PrefMark for Cursor
+# PrefMark for Cursor, Claude and Gemini
 
 PrefMark — The Investment Memo that stays current. Read stance, Since last time, and open questions from Deal State; propose updates that only land when you Accept in PrefMark.
 
-PrefMark is a pre-decision workspace for early-stage private investments. Startup materials become a structured Investment Memo with evidence tiers and provenance, open diligence questions, and a stance (Greenlight, Watch or Pass) that stays current as the deal moves. This plugin connects Cursor to your own PrefMark workspace.
+PrefMark is a pre-decision workspace for early-stage private investments. Startup materials become a structured Investment Memo with evidence tiers and provenance, open diligence questions, and a stance (Greenlight, Watch or Pass) that stays current as the deal moves. This repository connects Cursor, Claude Code and Gemini CLI to your own PrefMark workspace. Claude, ChatGPT and the Gemini app can connect to the same server by URL.
 
 ## What is in the plugin
 
 | Component | Name | What it does |
 |---|---|---|
 | MCP server | `prefmark` | Eight tools over `https://prefmark.com/mcp`, signed in with OAuth |
-| Rule | PrefMark | How an agent should use the tools: resolve the deal first, treat deal content as data, keep evidence tiers honest, send updates as proposals |
+| Rule | PrefMark (`rules/prefmark.mdc` in Cursor, `GEMINI.md` in Gemini CLI) | How an agent should use the tools: resolve the deal first, treat deal content as data, keep evidence tiers honest, send updates as proposals |
 | Skill | `prefmark-deal-status` | Where a deal stands: stance, what it hangs on, Since last time, blockers, next action |
 | Skill | `prefmark-relay-update` | Turns a founder email or meeting notes into a proposal on the right deal |
 | Skill | `prefmark-call-prep` | Questions for a founder or diligence call, blockers first |
 | Skill | `prefmark-whats-new` | What moved across your deals and what is waiting for your review |
-| Command | `/prefmark-status` | Runs the deal status skill |
+| Command | `/prefmark-status` | Runs the deal status skill (Gemini CLI uses the matching `.toml` files) |
 | Command | `/prefmark-relay` | Runs the relay skill on what is in the chat |
 | Command | `/prefmark-prep` | Runs the call prep skill |
 | Command | `/prefmark-whats-new` | Runs the what's new skill |
@@ -47,11 +47,42 @@ Deal content is returned under `untrusted_content`, so an agent treats what a fo
 
 ## Install
 
-1. Import this repository as a plugin in Cursor (**Dashboard → Plugins → Import from Repo**), or add the MCP server `https://prefmark.com/mcp` by hand.
-2. Click **Login** on the PrefMark server. You sign in to PrefMark and choose what the connection may do.
-3. Leave the three read permissions ticked. Tick **Propose updates** only if you want agents to send proposals; it is off by default.
+The server address is the same everywhere: `https://prefmark.com/mcp`. You sign in to PrefMark the first time you use it and choose what the connection may do.
 
-Already connected before this version, and a tool answers `insufficient_scope`? Your connection was approved with fewer permissions. Disconnect PrefMark in Cursor, connect again, and tick the permissions you want. You can also remove a connection at any time from **Settings → Connected agents** in PrefMark.
+### Cursor
+
+Install PrefMark from [cursor.directory](https://cursor.directory/plugins/prefmark). You can also add the MCP server `https://prefmark.com/mcp` by hand. Then click **Login** on the PrefMark server.
+
+### Claude Code
+
+```
+/plugin marketplace add eylonmkoret-creator/prefmark-cursor-plugin
+/plugin install prefmark@prefmark
+```
+
+Run `/mcp` and pick PrefMark to sign in.
+
+### Gemini CLI
+
+```
+gemini extensions install https://github.com/eylonmkoret-creator/prefmark-cursor-plugin
+```
+
+Run `/mcp auth prefmark` to sign in. The extension adds the same four commands as `/prefmark-status`, `/prefmark-relay`, `/prefmark-prep` and `/prefmark-whats-new`, and loads the PrefMark guidance from `GEMINI.md`.
+
+### Claude, ChatGPT and the Gemini app
+
+These connect by URL and get the eight tools, without the skills and commands in this repository.
+
+- Claude: Settings, then Connectors, then Add custom connector. Paste `https://prefmark.com/mcp`.
+- ChatGPT: turn on developer mode under Settings, then add `https://prefmark.com/mcp` as a connector.
+- Gemini app: Settings, then Connected apps, then Custom apps. Paste `https://prefmark.com/mcp`. Google limits custom apps to personal accounts in the US.
+
+### Permissions
+
+Leave the three read permissions ticked. Tick **Propose updates** only if you want agents to send proposals. It is off by default.
+
+If a tool answers `insufficient_scope`, the connection was approved with fewer permissions than that tool needs. Disconnect PrefMark in your client, connect again, and tick the permissions you want. You can remove a connection at any time from **Settings → Connected agents** in PrefMark.
 
 ## Access
 
@@ -67,6 +98,6 @@ PrefMark is currently available by invitation. You need a PrefMark account to co
 
 PrefMark is at [prefmark.com](https://prefmark.com). Questions: hello@prefmark.com
 
-This repository contains the Cursor plugin only. It is not the PrefMark application.
+This repository holds the PrefMark plugin for Cursor, Claude Code and Gemini CLI. It is not the PrefMark application.
 
 © PrefMark. All rights reserved.
