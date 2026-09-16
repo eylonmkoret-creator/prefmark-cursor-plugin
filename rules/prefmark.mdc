@@ -51,7 +51,7 @@ Use this for a new figure or anything that should move the stance or the memo.
 - `claims` holds only figures that were actually stated, at most five. Each has a `key` from: `arr`, `mrr`, `burn_monthly`, `runway_months`, `gross_margin_pct`, `raise_amount`, `pre_money_valuation`, `post_money_valuation`, `customers`, `stage`, `other`. `value` is written as stated ("$1.8M", "14 months", "62%"). Add `as_of` (YYYY-MM-DD) only when a date was given.
 - `idempotency_key` should be stable for the source message, such as `gmail:<message-id>`. Sending the same key again returns the first result instead of a second proposal.
 - `occurred_at` is when it was said, if you know it.
-- To propose an **Investment Memo section edit**, also send `section_key` (`exec`, `thesis`, `biz`, `team`, `market`, `traction`, `raise`, or `key_risk`) and `proposed_text`. For `key_risk`, `target` is the existing risk name. Do not send `claims` with a section edit. Confirm the proposed text before sending.
+- To propose an **Investment Memo section edit**, also send `section_key` (`exec`, `thesis`, `biz`, `team`, `market`, `traction`, `raise`, or `key_risk`) and `proposed_text`. For `key_risk`, `target` is the existing risk name. Do not send `claims` with a section edit. Confirm the proposed text before sending. PrefMark polishes the wording without changing facts and returns `proposed_text`: show the investor that version, since it is exactly what lands on Accept.
 
 Tell the investor the result plainly:
 
