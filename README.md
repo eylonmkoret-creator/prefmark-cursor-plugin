@@ -14,10 +14,12 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 | Skill | `prefmark-relay-update` | Turns a founder email or meeting notes into a proposal on the right deal |
 | Skill | `prefmark-call-prep` | Questions for a founder or diligence call, blockers first |
 | Skill | `prefmark-whats-new` | What moved across your deals and what is waiting for your review |
+| Skill | `prefmark-memo-edit` | Proposes a rewrite of an Investment Memo section, which lands when you accept it |
 | Command | `/prefmark-status` | Runs the deal status skill (Gemini CLI uses the matching `.toml` files) |
 | Command | `/prefmark-relay` | Runs the relay skill on what is in the chat |
 | Command | `/prefmark-prep` | Runs the call prep skill |
 | Command | `/prefmark-whats-new` | Runs the what's new skill |
+| Command | `/prefmark-memo-edit` | Runs the memo edit skill |
 
 ## Tools
 
@@ -78,7 +80,7 @@ Run `/mcp` and pick PrefMark to sign in.
 gemini extensions install https://github.com/eylonmkoret-creator/prefmark-cursor-plugin
 ```
 
-Run `/mcp auth prefmark` to sign in. The extension adds the same four commands as `/prefmark-status`, `/prefmark-relay`, `/prefmark-prep` and `/prefmark-whats-new`, and loads the PrefMark guidance from `GEMINI.md`.
+Run `/mcp auth prefmark` to sign in. The extension adds the same five commands as `/prefmark-status`, `/prefmark-relay`, `/prefmark-prep`, `/prefmark-whats-new` and `/prefmark-memo-edit`, and loads the PrefMark guidance from `GEMINI.md`.
 
 ### Claude, ChatGPT and Grok
 
@@ -104,7 +106,7 @@ PrefMark is currently available by invitation. You need a PrefMark account to co
 
 - OAuth 2.1 with PKCE. The plugin ships no credentials; your agent receives a token scoped to your own workspace, issued only after you approve the consent screen.
 - Every call is scoped to your account. Limits per connection: 300 calls an hour, 30 proposals an hour, 20 proposals per deal per day.
-- Read access plus proposals only. Proposals change nothing until you accept them.
+- Reads, direct edits to your working records (diligence tracker, deal details, new deals, notes) and proposals. Stance, facts and the memo change only when you accept a proposal. Untick any permission on the consent screen to leave it out.
 
 ## About
 

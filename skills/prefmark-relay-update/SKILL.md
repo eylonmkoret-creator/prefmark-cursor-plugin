@@ -9,7 +9,7 @@ The update becomes a proposal. It changes nothing until the investor accepts it 
 
 ## Steps
 
-1. **Find the deal.** `resolve_deal` with the company name or the message subject. On `ambiguous`, ask the investor which deal. On `none`, tell them the deal is not in PrefMark and stop.
+1. **Find the deal.** `resolve_deal` with the company name or the message subject. On `ambiguous`, ask the investor which deal. On `none`, tell them the deal is not in PrefMark and offer to add it with `add_deals`. Continue only after they confirm, then resolve the new deal.
 2. **Read what PrefMark already has.** `get_evidence` for the deal, so you can tell the investor what is new, what matches and what disagrees.
 3. **Pick out what was actually said.**
    - `statement`: the substance, as close to verbatim as you have it, at most 1000 characters.
