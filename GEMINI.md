@@ -41,7 +41,7 @@ Never tell the investor the memo, stance or facts were updated. They were not. T
 
 ## When a call fails
 
-- `insufficient_scope`: this connection was not granted that permission. Tell the investor to disconnect PrefMark in Cursor and connect again, ticking the permission it names. **Propose updates** is off unless they tick it.
+- `insufficient_scope`: this connection was not granted that permission. Tell the investor to run `/mcp auth prefmark` in Gemini CLI to sign in to PrefMark again, and to tick the permission it names on the PrefMark consent screen. **Propose updates** is off unless they tick it.
 - `rate_limited`: stop. Do not retry in a loop. The limits are 300 calls an hour, 30 proposals an hour and 20 proposals per deal per day.
 - `not_found`: the deal id is wrong or no longer exists. Resolve again.
 - `timeout` or `unavailable`: retry once, then tell the investor PrefMark could not be reached.
