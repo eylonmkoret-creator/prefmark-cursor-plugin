@@ -14,7 +14,7 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 | Skill | `prefmark-relay-update` | Turns a founder email or meeting notes into a proposal on the right deal |
 | Skill | `prefmark-call-prep` | Questions for a founder or diligence call, blockers first |
 | Skill | `prefmark-whats-new` | What moved across your deals and what is waiting for your review |
-| Skill | `prefmark-memo-edit` | Proposes a rewrite of an Investment Memo section, which lands when you accept it |
+| Skill | `prefmark-memo-edit` | Rewrites an Investment Memo section: PrefMark polishes the draft, you approve it in the chat, and it lands with an Undo in PrefMark |
 | Command | `/prefmark-status` | Runs the deal status skill (Gemini CLI uses the matching `.toml` files) |
 | Command | `/prefmark-relay` | Runs the relay skill on what is in the chat |
 | Command | `/prefmark-prep` | Runs the call prep skill |
@@ -35,6 +35,8 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 | `get_open_questions` | Read diligence | (with `include: "all"`) answered and resolved questions too, with answers and evidence |
 | `get_memo` | Read memos | The Investment Memo and Quick Read, as written in PrefMark |
 | `submit_deal_event` | Propose updates | Sends a statement, and up to five stated figures, to a deal **for your review** |
+| `draft_memo_edit` | Propose updates | Drafts a rewrite of one memo section. PrefMark polishes the wording without changing facts; nothing changes yet |
+| `apply_memo_edit` | Propose updates | Applies a drafted section rewrite after you say yes in the chat. You can undo it from the memo |
 | `add_question` | Edit diligence | Adds a question to the diligence tracker |
 | `update_question` | Edit diligence | Records an answer, evidence or notes, or changes a question status |
 | `remove_question` | Edit diligence | Deletes a question from the tracker |
@@ -46,14 +48,16 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 
 Your working records change the moment you ask: diligence questions and answers, deal details, new deals and notes. Sample deals cannot be changed from an app.
 
-The investment case is different. An agent never changes a stance, a fact or the memo by itself. `submit_deal_event` compares each stated figure with what PrefMark already holds (supports, contradicts, new, or cannot be checked) and answers with one of:
+A memo section rewrite you ask for lands once you approve PrefMark's polished text in the chat, and the memo shows it with **Undo**.
+
+Stance and facts are different. An agent never changes a stance or a fact by itself. `submit_deal_event` compares each stated figure with what PrefMark already holds (supports, contradicts, new, or cannot be checked) and answers with one of:
 
 - `pending_review`: something is new or different. It waits in PrefMark under **Needs your review**, and the answer includes a link straight to it.
 - `recorded`: it matches what PrefMark already had, so the case did not change.
 - `duplicate`: the same message was already received.
 - `rejected`: the deal name did not match the deal, or the same idempotency key was already used for a different deal.
 
-Nothing enters the memo, the stance or the facts until you press **Accept** in PrefMark. A figure a founder states stays founder-claimed after you accept it; accepting never turns a claim into verified evidence.
+Nothing from a relayed update enters the memo, the stance or the facts until you press **Accept** in PrefMark. A figure a founder states stays founder-claimed after you accept it; accepting never turns a claim into verified evidence.
 
 Deal content is returned under `untrusted_content`, so an agent treats what a founder wrote as data rather than as instructions.
 
@@ -106,7 +110,7 @@ PrefMark is currently available by invitation. You need a PrefMark account to co
 
 - OAuth 2.1 with PKCE. The plugin ships no credentials; your agent receives a token scoped to your own workspace, issued only after you approve the consent screen.
 - Every call is scoped to your account. Limits per connection: 300 calls an hour, 30 proposals an hour, 20 proposals per deal per day.
-- Reads, direct edits to your working records (diligence tracker, deal details, new deals, notes) and proposals. Stance, facts and the memo change only when you accept a proposal. Untick any permission on the consent screen to leave it out.
+- Reads, direct edits to your working records (diligence tracker, deal details, new deals, notes) and proposals. Memo rewrites apply once you approve them in the chat and can be undone; stance and facts change only when you accept a proposal. Untick any permission on the consent screen to leave it out.
 
 ## About
 
