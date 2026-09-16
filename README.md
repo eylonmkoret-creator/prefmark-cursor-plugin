@@ -1,6 +1,6 @@
 # PrefMark for Cursor, Claude and Gemini
 
-PrefMark — The Investment Memo that stays current. Read stance, Since last time, and open questions from Deal State; propose updates that only land when you Accept in PrefMark.
+PrefMark: The Investment Memo that stays current. Read stance, Since last time, and open questions from Deal State; propose updates that only land when you Accept in PrefMark.
 
 PrefMark is a pre-decision workspace for early-stage private investments. Startup materials become a structured Investment Memo with evidence tiers and provenance, open diligence questions, and a stance (Greenlight, Watch or Pass) that stays current as the deal moves. This repository connects Cursor, Claude Code and Gemini CLI to your own PrefMark workspace. Claude, ChatGPT and the Gemini app can connect to the same server by URL.
 

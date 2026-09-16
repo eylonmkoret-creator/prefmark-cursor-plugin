@@ -2,7 +2,7 @@
   "name": "prefmark",
   "displayName": "PrefMark",
   "version": "1.1.0",
-  "description": "PrefMark — The Investment Memo that stays current. Read stance, Since last time, and open questions from Deal State; propose updates that only land when you Accept in PrefMark.",
+  "description": "PrefMark: The Investment Memo that stays current. Read stance, Since last time, and open questions from Deal State; propose updates that only land when you Accept in PrefMark.",
   "author": {
     "name": "PrefMark",
     "email": "hello@prefmark.com"
