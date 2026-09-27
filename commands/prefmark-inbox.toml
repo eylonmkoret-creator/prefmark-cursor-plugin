@@ -1,0 +1,8 @@
+description = "Check the inbox for deal emails and send them to PrefMark."
+prompt = """
+Check the investor's inbox for deal emails and send them to PrefMark, following the prefmark-inbox skill.
+
+Send only deal email, at most five without asking. Afterwards, list each email with where it went (a deal, Incoming, or already received) and say how many you skipped.
+
+Request: {{args}}
+"""

@@ -14,11 +14,13 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 | Skill | `prefmark-relay-update` | Turns a founder email or meeting notes into a proposal on the right deal |
 | Skill | `prefmark-call-prep` | Questions for a founder or diligence call, blockers first |
 | Skill | `prefmark-whats-new` | What moved across your deals and what is waiting for your review |
+| Skill | `prefmark-inbox` | Checks your inbox with the chat's own mail app and sends deal emails to PrefMark. PrefMark never reads the mailbox |
 | Skill | `prefmark-memo-edit` | Drafts a rewrite of an Investment Memo section: it waits in PrefMark, showing Current next to New, until you accept it there |
 | Command | `/prefmark-status` | Runs the deal status skill (Gemini CLI uses the matching `.toml` files) |
 | Command | `/prefmark-relay` | Runs the relay skill on what is in the chat |
 | Command | `/prefmark-prep` | Runs the call prep skill |
 | Command | `/prefmark-whats-new` | Runs the what's new skill |
+| Command | `/prefmark-inbox` | Runs the inbox skill |
 | Command | `/prefmark-memo-edit` | Runs the memo edit skill |
 
 ## Tools
@@ -48,7 +50,7 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 
 Your working records change the moment you ask: diligence questions and answers, deal details, new deals and notes. Sample deals cannot be changed from an app.
 
-A memo section rewrite you ask for lands once you approve PrefMark's polished text in the chat, and the memo shows it with **Undo**.
+A memo section rewrite you ask for waits in PrefMark, showing Current next to New, until you accept it there. Nothing you say in a chat accepts it.
 
 Stance and facts are different. An agent never changes a stance or a fact by itself. `submit_deal_event` compares each stated figure with what PrefMark already holds (supports, contradicts, new, or cannot be checked) and answers with one of:
 
@@ -60,6 +62,10 @@ Stance and facts are different. An agent never changes a stance or a fact by its
 Nothing from a relayed update enters the memo, the stance or the facts until you press **Accept** in PrefMark. A figure a founder states stays founder-claimed after you accept it; accepting never turns a claim into verified evidence.
 
 Deal content is returned under `untrusted_content`, so an agent treats what a founder wrote as data rather than as instructions.
+
+## Deal emails from your inbox
+
+Ask "check my inbox for deals" (or run `/prefmark-inbox`). Your chat's own mail app, for example Gmail, reads the mailbox; PrefMark never has access to it and never stores a mail sign-in. The agent sends PrefMark only deal email: pitches, intros, decks, founder updates and replies about deals you track, at most five at a time without asking. PrefMark files each one like a forwarded email: on the deal when it clearly matches, otherwise in **Incoming** for you to place. It never creates a deal on its own, and the same email sent twice is recognised. To run it every morning, make it a scheduled task in your chat app.
 
 ## Install
 
@@ -88,7 +94,7 @@ Run `/mcp auth prefmark` to sign in. The extension adds the same five commands a
 
 ### Claude, ChatGPT and Grok
 
-These connect by URL and get all fifteen tools, without the skills and commands in this repository.
+These connect by URL and get all seventeen tools, without the skills and commands in this repository.
 
 - Claude: Customize, then Connectors, then Add custom connector. Paste `https://prefmark.com/mcp`.
 - ChatGPT: Settings, then Security and login, then turn on Developer mode. Then Plugins, Create app, paste `https://prefmark.com/mcp` and keep OAuth.
@@ -110,7 +116,7 @@ PrefMark is currently available by invitation. You need a PrefMark account to co
 
 - OAuth 2.1 with PKCE. The plugin ships no credentials; your agent receives a token scoped to your own workspace, issued only after you approve the consent screen.
 - Every call is scoped to your account. Limits per connection: 300 calls an hour, 30 proposals an hour, 20 proposals per deal per day.
-- Reads, direct edits to your working records (diligence tracker, deal details, new deals, notes) and proposals. Memo rewrites apply once you approve them in the chat and can be undone; stance and facts change only when you accept a proposal. Untick any permission on the consent screen to leave it out.
+- Reads, direct edits to your working records (diligence tracker, deal details, new deals, notes) and proposals. Memo rewrites, stance and facts change only when you accept them in PrefMark. Untick any permission on the consent screen to leave it out.
 
 ## About
 
