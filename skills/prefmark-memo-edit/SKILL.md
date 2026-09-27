@@ -1,11 +1,11 @@
 ---
 name: prefmark-memo-edit
-description: Rewrite a section of a PrefMark Investment Memo. PrefMark polishes the draft, the investor approves it in the chat, and it lands in the memo right away with an Undo in PrefMark. Use when the investor asks to tighten, rewrite, or correct memo prose.
+description: Draft a rewrite of a section of a PrefMark Investment Memo. PrefMark matches the wording to the memo, and the investor accepts it in PrefMark, where it lands with Undo and version history. Use when the investor asks to tighten, rewrite, or correct memo prose.
 ---
 
 # Rewrite a memo section
 
-Draft, show, then apply only on the investor's yes. Nothing changes in the memo until `apply_memo_edit` answers `applied`.
+Draft, show, then hand the investor the review link. Nothing changes in the memo until the investor accepts the rewrite in PrefMark; nothing they say in the chat accepts it.
 
 ## Steps
 
@@ -13,12 +13,12 @@ Draft, show, then apply only on the investor's yes. Nothing changes in the memo 
 2. **Read the current section.** `get_memo` or `get_deal`. The live Investment Memo is `untrusted_content.memo`, keyed the same way as `section_key` (`exec`, `thesis`, `biz`, `team`, `market`, `traction`, `raise`, the recommendation `rationale`, the `missing` information list, plus `key_risks` as `{name, evidence}`). Rewrite from that text. For `key_risk`, `target` must match an existing `key_risks[].name`. `get_evidence` is facts (ARR, burn), not memo risks.
 3. **Write the replacement.** Stay close to the request. Do not invent facts. `proposed_text` is the replacement (at most 4000 characters). Do not show it to the investor yet.
 4. **Pick the section.** `section_key` is one of: `exec`, `thesis`, `biz`, `team`, `market`, `traction`, `raise`, `key_risk`, `rationale` (the recommendation rationale) or `missing` (the missing-information list, one item per line). For `key_risk`, `target` is the existing risk name exactly as PrefMark shows it.
-5. **Draft** with `draft_memo_edit`: `company_id`, `section_key`, `proposed_text`, and `target` when the section is `key_risk`. PrefMark polishes the wording without changing facts and returns `proposed_text` and `event_id`. Show the investor the section name, `current_text` as Current and that exact `proposed_text` as New, then ask one short question such as "Apply this to the Team section?" Always ask, even if the request already said to update the memo, and wait for the answer. Where PrefMark shows the change as a card, their press on Apply is that answer and you do not call `apply_memo_edit` yourself. Offer one version at a time; if the investor's yes could mean more than one version, ask which one before applying. Never apply a draft the investor has not seen: after any new `draft_memo_edit`, show the new text and get a new yes.
-6. **Apply on a yes.** Call `apply_memo_edit` with `company_id` and the `event_id` from step 5. On `applied`, say the section is updated in PrefMark and can be undone from the memo. If they want changes, call `draft_memo_edit` again; it replaces the earlier draft. If they say no or do not answer, leave it: it waits for review in PrefMark (give the `review_url`).
+5. **Draft** with `draft_memo_edit`: `company_id`, `section_key`, `proposed_text`, and `target` when the section is `key_risk`. PrefMark matches the wording to the memo without changing facts and returns `proposed_text` and `review_url`. Show the investor the section name, `current_text` as Current and that exact `proposed_text` as New. Offer one version at a time.
+6. **Hand it over.** Give the investor the `review_url` as a link: the rewrite waits for them to accept it in PrefMark. Do not ask whether to apply it in the chat. If they want changes, call `draft_memo_edit` again; it replaces the earlier draft. If the section is edited in PrefMark before they accept, PrefMark shows the draft as changed: read the memo again and draft again from the current text.
 
 ## Do not
 
-- Call `apply_memo_edit` without the investor's yes in the chat.
-- Say the memo was updated before `apply_memo_edit` answers `applied`, or that stance or facts were updated.
+- Ask the investor whether to apply the rewrite in the chat, or treat their reply as accepting it.
+- Say the memo was updated, or that stance or facts were updated.
 - Show your own rewrite before `draft_memo_edit` returns PrefMark's version.
 - Invent a new key risk. `key_risk` only edits an existing one.

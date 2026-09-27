@@ -21,6 +21,10 @@ The update becomes a proposal. It changes nothing until the investor accepts it 
 5. **Send** with `submit_deal_event`, using the deal's `company_id` and its `company_name` exactly as PrefMark shows it.
 6. **Tell the investor the outcome**, using the result statuses in the PrefMark rule. For `pending_review`, give the `review_url` and say it lands only if they accept it. For each claim, say whether PrefMark found that it supports, contradicts, is new, or cannot be checked.
 
+## A whole email from the investor's mailbox
+
+When the investor asks to send a deal email itself to PrefMark ("send the latest email from the Acme founder to PrefMark"), read it with your own mail tool and call `import_email` with its fields (the Message-ID header as `rfc_message_id` when shown, your tool's own id as `message_id`) and its text exactly as written, instead of summarising it into `submit_deal_event`. PrefMark files it like a forwarded email: on the deal when it clearly matches, otherwise in Incoming. Only deal email the investor asked for; ask before sending more than five.
+
 ## Do not
 
 - Split one message into many proposals to get around limits.

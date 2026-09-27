@@ -2,7 +2,7 @@ description = "Rewrite an Investment Memo section, applied once you approve it i
 prompt = """
 Rewrite the requested Investment Memo section on the right PrefMark deal, following the prefmark-memo-edit skill.
 
-Draft it with draft_memo_edit, show the polished text PrefMark returns, and apply it with apply_memo_edit only when the investor says yes. Then say it is saved and can be undone from the memo in PrefMark.
+Draft it with draft_memo_edit and show Current next to New. The memo changes only when the investor accepts the draft in PrefMark: give them the review link. Never say the memo was updated.
 
 Request: {{args}}
 """

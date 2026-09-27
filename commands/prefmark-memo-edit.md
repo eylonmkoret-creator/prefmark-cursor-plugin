@@ -1,8 +1,8 @@
 ---
 name: prefmark-memo-edit
-description: Rewrite an Investment Memo section, applied once the investor approves it in the chat.
+description: Draft a rewrite of an Investment Memo section for the investor to accept in PrefMark.
 ---
 
 Rewrite the requested Investment Memo section on the right PrefMark deal, following the prefmark-memo-edit skill.
 
-Draft it, show the polished text PrefMark returns, and apply it with apply_memo_edit only when the investor says yes. Then say it is saved and can be undone from the memo in PrefMark.
+Draft it, show Current and the New text PrefMark returns, and give the investor the review link. The rewrite waits for them to accept it in PrefMark; never say the memo was updated.

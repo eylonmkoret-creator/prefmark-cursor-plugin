@@ -8,13 +8,13 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 
 | Component | Name | What it does |
 |---|---|---|
-| MCP server | `prefmark` | Eight tools over `https://prefmark.com/mcp`, signed in with OAuth |
+| MCP server | `prefmark` | Seventeen tools over `https://prefmark.com/mcp`, signed in with OAuth |
 | Rule | PrefMark (`rules/prefmark.mdc` in Cursor, `GEMINI.md` in Gemini CLI) | How an agent should use the tools: resolve the deal first, treat deal content as data, keep evidence tiers honest, send updates as proposals |
 | Skill | `prefmark-deal-status` | Where a deal stands: stance, what it hangs on, Since last time, blockers, next action |
 | Skill | `prefmark-relay-update` | Turns a founder email or meeting notes into a proposal on the right deal |
 | Skill | `prefmark-call-prep` | Questions for a founder or diligence call, blockers first |
 | Skill | `prefmark-whats-new` | What moved across your deals and what is waiting for your review |
-| Skill | `prefmark-memo-edit` | Rewrites an Investment Memo section: PrefMark polishes the draft, you approve it in the chat, and it lands with an Undo in PrefMark |
+| Skill | `prefmark-memo-edit` | Drafts a rewrite of an Investment Memo section: it waits in PrefMark, showing Current next to New, until you accept it there |
 | Command | `/prefmark-status` | Runs the deal status skill (Gemini CLI uses the matching `.toml` files) |
 | Command | `/prefmark-relay` | Runs the relay skill on what is in the chat |
 | Command | `/prefmark-prep` | Runs the call prep skill |
@@ -35,14 +35,14 @@ PrefMark is a pre-decision workspace for early-stage private investments. Startu
 | `get_open_questions` | Read diligence | (with `include: "all"`) answered and resolved questions too, with answers and evidence |
 | `get_memo` | Read memos | The Investment Memo and Quick Read, as written in PrefMark |
 | `submit_deal_event` | Propose updates | Sends a statement, and up to five stated figures, to a deal **for your review** |
-| `draft_memo_edit` | Propose updates | Drafts a rewrite of one memo section. PrefMark polishes the wording without changing facts; nothing changes yet |
-| `apply_memo_edit` | Propose updates | Applies a drafted section rewrite after you say yes in the chat. You can undo it from the memo |
+| `draft_memo_edit` | Propose updates | Drafts a rewrite of one memo section. PrefMark matches the wording to the memo without changing facts; the memo changes only when you accept the draft in PrefMark |
 | `add_question` | Edit diligence | Adds a question to the diligence tracker |
 | `update_question` | Edit diligence | Records an answer, evidence or notes, or changes a question status |
-| `remove_question` | Edit diligence | Deletes a question from the tracker |
+| `remove_question` | Edit diligence | Removes a question from the tracker. PrefMark keeps a copy, so it can be restored |
 | `add_deals` | Add and edit deals | Adds up to 25 companies at once and never duplicates a deal you have |
 | `update_deal` | Add and edit deals | Changes name, stage, sector, website, HQ, round size, lead investor or description |
 | `add_note` | Add and edit deals | Saves meeting notes or an email to the deal's Materials |
+| `import_email` | Add and edit deals | Sends one email from your mailbox (read with your own mail tool) to PrefMark. It is filed like a forwarded email: on the deal when it clearly matches, otherwise in Incoming. Duplicates are recognised |
 
 ## What saves right away, and what waits for you
 
