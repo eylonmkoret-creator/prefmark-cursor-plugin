@@ -9,6 +9,7 @@
     "url": "https://prefmark.com"
   },
   "homepage": "https://prefmark.com",
+  "privacyPolicyUrl": "https://prefmark.com/legal.html#privacy",
   "repository": "https://github.com/eylonmkoret-creator/prefmark-cursor-plugin",
   "license": "LicenseRef-Proprietary",
   "keywords": [
@@ -20,5 +21,5 @@
     "diligence",
     "mcp"
   ],
-  "mcpServers": "./mcp.json"
+  "mcpServers": "./.mcp.json"
 }

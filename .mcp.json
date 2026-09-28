@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "prefmark": {
+      "type": "http",
+      "url": "https://prefmark.com/mcp"
+    }
+  }
+}
