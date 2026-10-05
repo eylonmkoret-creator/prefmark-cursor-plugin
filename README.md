@@ -78,7 +78,7 @@ In Claude, open Customize, then Connectors, search for **PrefMark** and connect.
 ### Claude Code
 
 ```
-/plugin marketplace add eylonmkoret-creator/prefmark-plugin
+/plugin marketplace add eylonmkoret-creator/prefmark-cursor-plugin
 /plugin install prefmark@prefmark
 ```
 
@@ -91,7 +91,7 @@ Install PrefMark from [cursor.directory](https://cursor.directory/plugins/prefma
 ### Gemini CLI
 
 ```
-gemini extensions install https://github.com/eylonmkoret-creator/prefmark-plugin
+gemini extensions install https://github.com/eylonmkoret-creator/prefmark-cursor-plugin
 ```
 
 Run `/mcp auth prefmark` to sign in. The extension adds the commands above and loads the PrefMark guidance from `GEMINI.md`.

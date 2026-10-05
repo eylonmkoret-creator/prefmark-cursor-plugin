@@ -12,8 +12,8 @@
   "privacyPolicyUrl": "https://prefmark.com/legal#privacy",
   "termsOfServiceUrl": "https://prefmark.com/legal#terms",
   "supportUrl": "https://prefmark.com/connect",
-  "documentationUrl": "https://github.com/eylonmkoret-creator/prefmark-plugin#readme",
-  "repository": "https://github.com/eylonmkoret-creator/prefmark-plugin",
+  "documentationUrl": "https://github.com/eylonmkoret-creator/prefmark-cursor-plugin#readme",
+  "repository": "https://github.com/eylonmkoret-creator/prefmark-cursor-plugin",
   "license": "LicenseRef-Proprietary",
   "keywords": [
     "prefmark",
