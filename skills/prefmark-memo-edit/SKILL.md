@@ -16,6 +16,11 @@ Draft, show, then hand the investor the review link. Nothing changes in the memo
 5. **Draft** with `draft_memo_edit`: `company_id`, `section_key`, `proposed_text`, and `target` when the section is `key_risk`. PrefMark matches the wording to the memo without changing facts and returns `proposed_text` and `review_url`. Show the investor the section name, `current_text` as Current and that exact `proposed_text` as New. Offer one version at a time.
 6. **Hand it over.** Give the investor the `review_url` as a link: the rewrite waits for them to accept it in PrefMark. Do not ask whether to apply it in the chat. If they want changes, call `draft_memo_edit` again; it replaces the earlier draft. If the section is edited in PrefMark before they accept, PrefMark shows the draft as changed: read the memo again and draft again from the current text.
 
+## The whole memo, or the stance
+
+- **Several sections or the whole memo** ("half as long", "plainer", or the investor's own wording): call `draft_memo_rewrite` with `company_id` and an `instruction` in their words, or `sections` (`section_key`, `target` for a key risk, `text` as they wrote it). PrefMark rewrites each section without changing a fact or the stance and keeps the investor's own sections as written; a figure must already be in that section or among the accepted figures. Show each entry of `changes` as Current and New, list `left_as_is` with its reason, and give the `review_url`. One Accept in PrefMark takes every section that changes no figure; a section that changes a figure is accepted on its own.
+- **The stance** (Greenlight, Watch or Pass): never inside a rewrite. Call `propose_stance` with `stance` and the investor's `reason`, then give the `review_url`. PrefMark drafts the recommendation to match once the investor accepts the new stance there.
+
 ## Do not
 
 - Ask the investor whether to apply the rewrite in the chat, or treat their reply as accepting it.

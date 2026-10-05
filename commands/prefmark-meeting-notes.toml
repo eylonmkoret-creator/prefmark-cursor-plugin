@@ -1,0 +1,6 @@
+description = "Save a meeting's notes to the right PrefMark deal."
+prompt = """
+Save the notes from the meeting the investor names (or the latest one) to its deal in PrefMark, following the prefmark-meeting-notes skill: resolve the deal, write the note from the meeting's own summary or what they paste, send it with add_note, and give the Accept in PrefMark link when a change waits.
+
+Request: {{args}}
+"""

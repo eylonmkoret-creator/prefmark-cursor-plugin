@@ -19,7 +19,7 @@ The update becomes a proposal. It changes nothing until the investor accepts it 
    - `idempotency_key`: stable for this message, for example `gmail:<message-id>` or `meeting:<meeting-id>`.
 4. **Confirm before sending** when the investor has not already asked you to send it. Show the statement and the claims.
 5. **Send** with `submit_deal_event`, using the deal's `company_id` and its `company_name` exactly as PrefMark shows it.
-6. **Tell the investor the outcome**, using the result statuses in the PrefMark rule. For `pending_review`, give the `review_url` and say it lands only if they accept it. For each claim, say whether PrefMark found that it supports, contradicts, is new, or cannot be checked.
+6. **Tell the investor the outcome**, using the result statuses in the PrefMark rule. For `pending_review`, give the `review_url` as an Accept in PrefMark link and say it lands only if they accept it. For each claim, say whether PrefMark found that it supports, contradicts, is new, or cannot be checked.
 
 ## A whole email from the investor's mailbox
 

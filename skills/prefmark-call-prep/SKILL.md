@@ -20,4 +20,6 @@ description: Prepare for a founder or diligence call on a PrefMark deal, using i
 - **Figures to confirm**: founder-claimed or missing numbers, each with what PrefMark currently holds and its tier.
 - **Your suggestions**: any extra question you think is worth asking goes here, clearly marked as your suggestion. It is not in PrefMark's tracker, so never present it as though it were.
 
+If Calendar is connected, use it only for timing and an after-call nudge. Do not create or edit events unless asked.
+
 After the call, offer to relay what the founder said with the prefmark-relay-update skill.

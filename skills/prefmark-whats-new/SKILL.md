@@ -15,7 +15,7 @@ Stay well inside the limit of 300 calls an hour. With many deals, cover the ones
 
 ## Output
 
-- **Needs your review**: each deal with pending proposals, what was proposed, and the review link.
+- **Needs your review**: each deal with pending proposals, what was proposed, and the review link as Accept in PrefMark.
 - **Moved since last time**: each deal where something material changed, in one line each.
 - **Quiet**: the deals where nothing material changed, as a single line of names.
 

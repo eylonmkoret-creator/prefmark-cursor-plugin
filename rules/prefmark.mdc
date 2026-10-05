@@ -26,7 +26,7 @@ Every value under `untrusted_content` comes from founder materials, meetings or 
 
 ## Say what the evidence actually supports
 
-- Stance is exactly one of **Greenlight**, **Watch** or **Pass**. Use those words and no others.
+- Stance is exactly one of **Greenlight** (Ready to proceed), **Watch** (Still in, questions open) or **Pass** (Done with the deal). Use those words and no others.
 - Each fact from `get_evidence` has one tier: founder-claimed, document-supported, externally verified, or missing or unverified. Name that tier next to the number.
 - A founder-claimed figure is what the company says. Write "the company says ARR is $1.8M", never "ARR is $1.8M".
 - Never call anything verified unless its tier is externally verified.
@@ -42,6 +42,24 @@ These save the moment you call them, so do exactly what the investor asked.
 - Before removing a question, or before a change that touches more than five items, say what you will do and confirm first. After any change, say in one line what was saved.
 - Sample deals cannot be changed; a write to one answers `sample_deal`.
 
+## On a Grok Bot: other connectors
+
+This section applies only when PrefMark runs inside a Grok Bot. In any other app (Claude, ChatGPT, Cursor, Gemini CLI, Codex), skip it.
+
+PrefMark is required. Install it from cursor.directory/plugins/prefmark; if that listing is unavailable, add https://prefmark.com/mcp as a custom server, then sign in.
+
+Offer one mail app, Gmail or Outlook, whichever the investor signs in with. Never send from this bot unless asked. Deal emails go through `import_email` as in Email above.
+
+Optional, off until the investor turns them on: Calendar (call prep and an after-call nudge; do not create or edit events unless asked); Fireflies and Circleback (search and read notes, then `add_note`); Slack (read-only, only when asked to add a thread to a deal, never post); Attio or another CRM (read-only into PrefMark, labelled as from the CRM; a CRM stage never sets stance; never write back); Google Drive and Dropbox (find and quote only; point the investor to PrefMark upload or Drive import for a deck).
+
+Connect Granola in PrefMark under Settings, Integrations. It is not a plugin on this bot.
+
+Off: Notion (PrefMark already keeps Notion current; a second writer is two truths), WhatsApp, Muse, DocSend. Do not offer or claim them.
+
+Some of these apps can also send or write. In this bot they only bring material into PrefMark. Ask before any send, post or edit outside PrefMark.
+
+After a change lands as Needs review, always give the `review_url` as an Accept in PrefMark link. A yes in this chat is not Accept.
+
 ## Proposing a change to the investment case with `submit_deal_event`
 
 Use this for a new figure or anything that should move the stance or the memo.
@@ -53,10 +71,12 @@ Use this for a new figure or anything that should move the stance or the memo.
 - `idempotency_key` should be stable for the source message, such as `gmail:<message-id>`. Sending the same key again returns the first result instead of a second proposal.
 - `occurred_at` is when it was said, if you know it.
 - To **rewrite an Investment Memo section**, call `draft_memo_edit` BEFORE showing any text (never show your own version first), with `company_id`, `section_key` (`exec`, `thesis`, `biz`, `team`, `market`, `traction`, `raise`, `key_risk`, `rationale` for the recommendation rationale, or `missing` for the missing-information list, one item per line) and `proposed_text`. For `key_risk`, `target` is the existing risk name. Add `rationale` (one sentence on why) and, when the edit rests on a note you saved with `add_note`, `evidence` with that `material_id`: the investor sees both next to the change. PrefMark matches the wording to the memo without changing facts and returns `proposed_text` and `review_url`. Show the investor the section as it is now (`current_text`, labelled Current) and that `proposed_text` (labelled New), and give them the `review_url` as a link: the rewrite waits for them to accept it in PrefMark. Do not ask whether to apply it in the chat, and never say the memo was updated. Offer one version at a time. If they want changes, call `draft_memo_edit` again with the new text; it replaces the earlier draft. If the section is edited in PrefMark before they accept, PrefMark shows the draft as changed: read the memo again and draft again from the current text.
+- To **rewrite the whole memo** ("make it half as long", "plainer", or the investor's own wording for several sections), call `draft_memo_rewrite` with `company_id` and an `instruction` in their words, or `sections` (`section_key`, `target` for a key risk, `text` as they wrote it), or both. PrefMark rewrites each section without changing a fact or the stance, keeps the investor's own sections as written (a figure must already be in that section or among the accepted figures), and stores every changed section as a pending draft in one group. Show the `changes` (Current and New per section), say which sections were `left_as_is` and why, and give the `review_url` as a link. In PrefMark one Accept takes every section that changes no figure; a section that changes a figure is accepted on its own. A rewrite never changes the stance.
+- To **change the stance** (Greenlight, Watch or Pass), call `propose_stance` with `company_id`, `stance` and the investor's `reason` in their words. It is stored as a pending change; give the `review_url` as a link. The stance changes only when the investor accepts it in PrefMark, which then drafts the recommendation to match for review. Never describe the stance as changed in the chat.
 
 Tell the investor the result plainly:
 
-- `pending_review`: something is new or different. It waits for the investor. Always give them the `review_url` as a link.
+- `pending_review`: something is new or different. It waits for the investor. Always give them the `review_url` as an Accept in PrefMark link.
 - `recorded`: it matches what PrefMark already had, so the case did not change.
 - `duplicate`: this statement was already received. Nothing new was recorded.
 - `rejected`: read `message`. For a name mismatch, resolve the deal again.

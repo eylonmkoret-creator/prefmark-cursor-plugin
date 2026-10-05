@@ -1,14 +1,14 @@
 {
   "name": "prefmark",
   "displayName": "PrefMark",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "PrefMark: The Investment Memo that stays current. Read stance, Since last time, and open questions from Deal State; propose updates that only land when you Accept in PrefMark.",
   "author": {
     "name": "PrefMark",
     "email": "hello@prefmark.com"
   },
   "homepage": "https://prefmark.com",
-  "repository": "https://github.com/eylonmkoret-creator/prefmark-cursor-plugin",
+  "repository": "https://github.com/eylonmkoret-creator/prefmark-plugin",
   "license": "Proprietary",
   "logo": "./logo.png",
   "keywords": [

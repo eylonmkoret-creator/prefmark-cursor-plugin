@@ -5,7 +5,7 @@ description: Check the investor's mailbox for deal emails (pitches, intros, deck
 
 # Send deal emails to PrefMark
 
-This chat's own mail app (for example Gmail) reads the mailbox. PrefMark never has access to it: it receives only the emails you send with `import_email`, one at a time. Send deal email and nothing else.
+This chat's own mail app (Gmail or Outlook; offer the one the investor signs in with) reads the mailbox. PrefMark never has access to it: it receives only the emails you send with `import_email`, one at a time. Send deal email and nothing else.
 
 ## Steps
 
